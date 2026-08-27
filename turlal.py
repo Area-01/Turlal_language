@@ -52,6 +52,11 @@ def _split_indent(line: str) -> tuple[str, str]:
     return match.group(1), match.group(2)
 
 
+def _is_raw_end(text: str) -> bool:
+    """닫는 문구의 '내가 만든'은 붙여 쓰거나 띄어 쓸 수 있다."""
+    return re.fullmatch(r"는\s+내가\s*만든\s+말이\s+아니야", text) is not None
+
+
 def transpile(source: str) -> str:
     """터랄 소스를 동등한 파이썬 소스로 변환한다."""
     lines = source.splitlines()
@@ -67,7 +72,7 @@ def transpile(source: str) -> str:
         indent, stripped = _split_indent(original)
 
         if raw_mode:
-            if stripped == RAW_END:
+            if _is_raw_end(stripped):
                 raw_mode = False
             else:
                 generated.append(GeneratedLine(index, original))
@@ -78,7 +83,7 @@ def transpile(source: str) -> str:
             raw_start_line = index
             continue
 
-        if stripped == RAW_END:
+        if _is_raw_end(stripped):
             raise TurlalSyntaxError(index, f"'{RAW_END}' 앞에는 '{RAW_START}'가 필요합니다.")
 
         # 빈 줄과 주석은 그대로 둔다.
