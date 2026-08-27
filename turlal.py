@@ -14,7 +14,7 @@ from pathlib import Path
 
 TERMINATOR = "등신 애쓴다 ㅋㅋ"
 RAW_START = "아싸리"
-RAW_END = "는 내가만든 말이 아니야"
+RAW_END = "는 내가 만든 말이 아니야"
 IDENTIFIER = r"[^\W\d]\w*"
 
 
