@@ -166,7 +166,7 @@ py .\turlal.py run .\main.turlal
 아싸리
 numbers = [1, 2, 3]
 print(sum(numbers))
-는 내가만든 말이 아니야
+는 내가 만든 말이 아니야
 
 등신 애쓴다 ㅋㅋ
 ```
